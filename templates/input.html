@@ -1,0 +1,42 @@
+<header>
+  <body><meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Musclee</title>
+      <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+      <div class="head1" style="padding: 20px;text-align: left;background: rgb(77, 73, 90);
+        color: white;
+        font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+            <h1>Musclee</h1>
+            <p>Your personal workout guide</p>
+        </div>
+      <div class="navbar">
+          <a href="home">Home</a>
+          <a href="input">Input Data</a>
+          <a href="data">View Data</a>
+          <a href="progress" >Progression</a>
+      <div class="dropdown">
+      <button class="dropbtn">Dropdown 
+          <i class="fa fa-caret-down"></i>
+      </button>
+          <div class="dropdown-content">
+            <a href="https://github.com/hollow-earth/hackathon2023/" target=”_blank”>Our Github</a>
+            <a href="https://musclewiki.com/" target=”_blank”>MuscleWiki</a>
+            <a href="https://devpost.com/software/musclee" target=”_blank”>Devpost</a>                   
+          </div>
+      </div> 
+  </body>    
+</header>     
+<div class="grid-container"> 
+  <form method= "post">
+    <label for="time">Time:</label><br>
+    <input type="date" name="time" style="width: 200px;"><br>
+    <label for="exercise">Exercise:</label><br>
+    <input type="text" name="exercise" style="width: 200px;"><br>
+    <label for="weight">Weight:</label><br>
+    <input type="text" name="weight" style="width: 200px;"><br>
+    <label for="reps">Reps:</label><br>
+    <input type="text" name="reps" style="width: 200px;"><br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
