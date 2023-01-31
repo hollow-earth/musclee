@@ -30,23 +30,37 @@ def index(): return render_template('home.html')
 @app.route('/input', methods=('GET', 'POST'))
 def input():
     if request.method == 'POST':
+        errorFlag = False
         date = request.form["time"]
-        date = int(str(date).replace("-",""))
-        weight = float(request.form["weight"])
-        reps = int(request.form["reps"])
-        exercise = str(request.form["exercise"])
+        weight = request.form["weight"]
+        reps = request.form["reps"]
+        exercise = request.form["exercise"]
 
-        if not date: flash("Date is required! (date)")
-        elif not weight: flash("Content is required! (float)")
-        elif not reps: flash("Number of reps are required (integer)")
-        elif not exercise: flash("Exercise required! (string)")
+        if date == "": flash("Date is required! (date)")
+        elif weight == "": flash("Content is required! (float)")
+        elif reps == "": flash("Number of reps are required (integer)")
+        elif exercise == "": flash("Exercise required! (string)")
+        
         else:
-            conn = db_manager.openDb()
-            db_manager.addRows(db=conn, tableNum=0, data=[(date, exercise, reps, weight)])
-            conn.commit()
-            if debugMode: print(db_manager.debugPrintTable(conn, 0))
-            db_manager.closeDb(conn)
-            return redirect(url_for('data'))
+            try: date = int(date.replace("-",""))
+            except: 
+                flash("Date is required! (date)")
+                errorFlag = True
+            try: weight = float(weight)
+            except: 
+                flash("Content is required! (float)")
+                errorFlag = True
+            try: reps = int(reps)
+            except: 
+                flash("Number of reps are required (integer)")
+                errorFlag = True
+            if errorFlag == False:
+                conn = db_manager.openDb()
+                db_manager.addRows(db=conn, tableNum=0, data=[(date, exercise, reps, weight)])
+                conn.commit()
+                if debugMode: print(db_manager.debugPrintTable(conn, 0))
+                db_manager.closeDb(conn)
+                return redirect(url_for('data'))
     return render_template('input.html')
 
 # @app.route('/<int:id>/edit/', methods=('GET', 'POST'))
