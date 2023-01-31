@@ -65,7 +65,7 @@ def fetchRows(db, tableNum, date, other_query):
     Parameters: tableNum (int): Table num: 0 for tracker, 1 for heatmap
     ''' # TODO: add all exercises mode?
     cur = db.cursor()
-    searchOptions = __searchOptions(tableNum, date, other_query)
+    searchOptions = __searchOptions(tableNum, date, other_query) + " ORDER BY date"
 
     if tableNum == 0: return cur.execute("SELECT * FROM workouts" + searchOptions).fetchall()
     elif tableNum == 1: return cur.execute("SELECT * FROM heatmap" + searchOptions).fetchall()
